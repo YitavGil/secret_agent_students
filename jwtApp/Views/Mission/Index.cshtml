@@ -1,0 +1,27 @@
+﻿@model List<jwtApp.Models.Mission>
+
+<h2>Classified Missions</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<div class="row">
+    @foreach (var mission in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@mission.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Difficulty: @mission.Difficulty</h6>
+                    <p class="card-text">@mission.Description</p>
+                    <form asp-action="AcceptMission" asp-controller="Mission" method="post">
+                        <input type="hidden" name="missionId" value="@mission.Id" />
+                        <button type="submit" class="btn btn-danger">Accept Mission</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
